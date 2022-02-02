@@ -1,0 +1,4 @@
+{
+  "topic": "TOPIC_TO_CONSUME",
+  "clientId": "CONSUMER_CLIENT_ID"
+}

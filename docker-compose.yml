@@ -1,0 +1,38 @@
+version: "3"
+services:
+  zookeeper:
+    image: zookeeper
+    container_name: zookeeper
+    hostname: zookeeper
+    ports:
+      - "2181:2181"
+  kafka:
+    image: confluentinc/cp-kafka
+    hostname: kafka
+    container_name: kafka
+    ports:
+      - "9092:9092"
+      - "29092:29092"
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+  kafkajs-consumer1:
+    image: kafkajs-examples:local
+    container_name: kafkaConsumer1
+    environment:
+      TOPIC_TO_CONSUME: 'topic1'
+      CONSUMER_CLIENT_ID: 'myClient1'
+    depends_on:
+      - "kafka"
+      - "zookeeper"
+  kafkajs-consumer2:
+    image: kafkajs-examples:local
+    container_name: kafkaConsumer2
+    environment:
+      TOPIC_TO_CONSUME: 'topic2'
+      CONSUMER_CLIENT_ID: 'myClient2'
+    depends_on:
+      - "kafka"
+      - "zookeeper"

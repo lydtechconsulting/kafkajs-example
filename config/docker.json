@@ -1,0 +1,6 @@
+{
+  "kafkaaddress": "kafka:9092",
+  "clientId": "myClient1",
+  "groupId":  "test-group",
+  "topic": "topic1"
+}

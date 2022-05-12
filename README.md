@@ -1,5 +1,12 @@
 ### Useful commands
 
+Update `docker-compose.yml` to define how many consumers listen to which topics.
+
+Build docker container with app
+
+```
+docker build -t kafkajs-examples:local .
+```
 
 Start Zookeeper, Kafka, consumer1 and consumer2
 ```
@@ -13,7 +20,7 @@ docker-compose logs --tail=0 --follow
 
 Send messages to topics
 ```
-£ produce main topic
+# produce main topic
 TOPIC_TO_PRODUCE_TO=topic1 npm run start-producer
 # produce other-topic
 TOPIC_TO_PRODUCE_TO=topic2 npm run start-producer
@@ -37,4 +44,9 @@ docker exec kafka /usr/bin/kafka-consumer-groups --bootstrap-server=localhost:90
 watch consumer group
 ```
 watch -n 0.5 docker exec kafka /usr/bin/kafka-consumer-groups --bootstrap-server=localhost:9092 --describe --group test-group
+```
+
+clean up docker containers
+```
+docker rm -f $(docker ps -aq)
 ```

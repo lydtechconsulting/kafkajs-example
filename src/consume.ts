@@ -27,6 +27,13 @@ const doWork = async () => {
             console.log({
                 value: `received message on topic/partition (${topic}/${partition}) - ${message.value?.toString()}`,
             })
+            console.log({
+                value: `stopping consumer...`,
+            });
+            consumer.stop().then(
+            console.log({
+                value: `consumer stopped`,
+            }));
         },
     })
 }

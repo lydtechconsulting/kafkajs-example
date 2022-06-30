@@ -31,7 +31,7 @@ services:
     image: kafkajs-examples:local
     container_name: kafkaConsumer2
     environment:
-      TOPIC_TO_CONSUME: 'topic2'
+      TOPIC_TO_CONSUME: 'topic1'
       CONSUMER_CLIENT_ID: 'myClient2'
     depends_on:
       - "kafka"

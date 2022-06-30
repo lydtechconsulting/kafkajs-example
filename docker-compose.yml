@@ -27,12 +27,12 @@ services:
     depends_on:
       - "kafka"
       - "zookeeper"
-  kafkajs-consumer2:
-    image: kafkajs-examples:local
-    container_name: kafkaConsumer2
-    environment:
-      TOPIC_TO_CONSUME: 'topic2'
-      CONSUMER_CLIENT_ID: 'myClient2'
-    depends_on:
-      - "kafka"
-      - "zookeeper"
+#  kafkajs-consumer2:
+#    image: kafkajs-examples:local
+#    container_name: kafkaConsumer2
+#    environment:
+#      TOPIC_TO_CONSUME: 'topic2'
+#      CONSUMER_CLIENT_ID: 'myClient2'
+#    depends_on:
+#      - "kafka"
+#      - "zookeeper"

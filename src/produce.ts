@@ -20,13 +20,21 @@ const doWork = async () => {
 
     await producer.connect()
     const topic = process.env.TOPIC_TO_PRODUCE_TO ?? 'topic1'
-    const message = `hello from kafkajs - ${new Date().toLocaleString()}`
-    console.log(`will send to ${topic} message (${message})`)
+    // const message = `hello from kafkajs - ${new Date().toLocaleString()}`
+
+    const messages = [ {value: "a"}, {value: "b"}, {value: "c"} ];
+
+    console.log(`will send to ${topic}`)
     await producer.send({
         topic,
-        messages: [
-            {value: message},
-        ],
+        messages
+        // messages: [
+        //     {value: message},
+        //     {value: message},
+        //     {value: message},
+        //     {value: message},
+        //     {value: message},
+        // ],
     })
 
     await producer.disconnect()

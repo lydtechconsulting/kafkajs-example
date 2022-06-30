@@ -21,12 +21,28 @@ const doWork = async () => {
     const topic = config.topic;
     console.log(`client ${clientId} consuming from topic ${topic} with consumer group ${groupId}`)
     await consumer.subscribe({ topic, fromBeginning: true })
+    let shouldErrorB = true;
+    let shouldErrorD = true;
 
     await consumer.run({
         eachMessage: async ({ topic, partition, message }: {topic: string, partition: number, message: KafkaMessage}) => {
             console.log({
-                value: `received message on topic/partition (${topic}/${partition}) - ${message.value?.toString()}`,
+                value: `received message on topic/partition (${topic}/${partition}) - ${message.value?.toString()} - full message: ${JSON.stringify(message)}`,
             })
+            if((message.value!.toString() === 'b') && shouldErrorB) {
+                console.log({
+                    value: `throwing error for 'b'`
+                })
+                shouldErrorB = false;
+                throw new Error("failing for 'b'");
+            }
+            if((message.value!.toString() === 'd') && shouldErrorD) {
+                console.log({
+                    value: `throwing error for 'd'`
+                })
+                shouldErrorD = false;
+                throw new Error("failing for 'd'");
+            }
         },
     })
 }
